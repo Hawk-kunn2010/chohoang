@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Explosion Effect</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+    }
+
+    a.link-button {
+      text-decoration: none;
+      color: #fff;
+      background-color: #ff4757;
+      padding: 1em 2em;
+      border-radius: 30px;
+      font-size: 1.25rem;
+      box-shadow: 0 6px 12px rgba(255, 71, 87, 0.4);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    a.link-button:hover,
+    a.link-button:focus {
+      background-color: #ff6b81;
+      box-shadow: 0 8px 20px rgba(255, 107, 129, 0.6);
+    }
+
+    .result {
+      margin-top: 2rem;
+      font-size: 0; /* ban đầu ẩn */
+      line-height: 1;
+      user-select: text;
+      opacity: 0;
+      transition: all 0.3s ease-out;
+    }
+
+    .show {
+      font-size: 8rem;
+      color: #fff;
+      animation: explode 0.5s ease-out forwards;
+      opacity: 1;
+    }
+
+    @keyframes explode {
+      0% {
+        transform: scale(0.3) rotate(-20deg);
+        opacity: 0.2;
+        filter: blur(3px);
+      }
+      50% {
+        transform: scale(1.2) rotate(10deg);
+        filter: blur(0);
+      }
+      100% {
+        transform: scale(1) rotate(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#" class="link-button" id="explosionLink" aria-label="Click to explode">Nhấp vào đây</a>
+  <div class="result" id="resultArea" aria-live="polite" aria-atomic="true"></div>
+
+  <script>
+    const link = document.getElementById('explosionLink');
+    const result = document.getElementById('resultArea');
+
+    link.addEventListener('click', function(event) {
+      event.preventDefault();
+      result.textContent = 'GAY';
+      result.classList.remove('show'); // reset lại animation nếu nhấn lần nữa
+      void result.offsetWidth;         // trick để restart animation
+      result.classList.add('show');
+    });
+  </script>
+</body>
+</html>
